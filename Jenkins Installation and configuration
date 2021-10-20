@@ -1,0 +1,106 @@
+################ Before Installing:
+Se-Linux should be disabled – sestatus
+Firewall should be disabled – systemctl stop firewalld
+sudo yum upgrade
+Sudo yum update
+sudo yum install java-11-openjdk-devel
+
+################ Installation:
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+sudo yum install jenkins java-11-openjdk-devel
+sudo systemctl daemon-reload
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo systemctl restart jenkins
+sudo systemctl status jenkins
+
+################ Configuring Jenkins GUI:
+	Open the browser and search “<localhost>:8080” - if it is on your local machine.
+	Open the browser and search “<server ip address/Domain name>:8080” - if it is on server.
+	Next it will ask the “Administrator password”
+
+ 
+	The password will be stored in this path: 
+	“/var/lib/jenkins/secrets/initialAdminPassword”.
+	Next it will ask to install the plugins, don’t install any plugin directly skip it and go to next.
+	Then it will ask the Username and Email id to configure.
+
+################ Installing Plugins:
+	After logged in into the Jenkins you will get Dashboard.
+	Go to “Manage Jenkins” which is there in left side of Dashboard.
+ 
+	Go to “Manage Plugins”
+ 
+	Once clicked on “Manage Plugins” you will get plugins dashboard with search option, again need to go “Available” option and search plugin name and click on check box of the plugins.
+ 
+	Once clicked on the check box of the plugin, downside there will be a option to install the plugins.
+ 
+	 Plugins needs to install: Ansible plugin, Locale plugin, Maven Integration plugin, Publish Over SSH, SSH plugin, SSH Agent Plugin, SSH Credentials Plugin, SVN 1.4 Compatibility Plugin, Workspace Cleanup Plugin, Email Extension Plugin, Docker plugin, Docker API plugin, Docker Commons plugin
+
+################ Adding Required Credentials:
+	After logged in into the Jenkins you will get Dashboard.
+	Go to “Manage Jenkins” which is there in left side of Dashboard.
+ 
+	Go to “Manage Credentials”
+ 
+	Click on “global”
+ 
+	Click on “Add Credentials” on the Left side.
+ 
+	Enter the ADS Credential details as per the below.
+ 
+
+################ Maven Installation and configuration in CentOS7 for Building a WAR file:
+	yum remove maven-wagon.noarch  ## remove existing maven packages first and delete the maven plugin package also if it is there.
+	sudo yum install java-1.8.0-openjdk
+	sudo yum install  java-1.8.0-openjdk-devel.x86_64
+	java -version ## if java exist make sure the version java 1.8
+	update-alternatives --config java  ## run this command and select java 1.8 version
+	update-alternatives --config javac  ## run this command and select java 1.8 version
+	cd /opt/
+	wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+	tar xvzf apache-maven-3.6.3-bin.tar.gz
+	ln -s /opt/apache-maven-3.6.3 /opt/maven
+	vim /etc/profile.d/maven.sh
+  export JAVA_HOME=/usr/lib/jvm/jre-openjdk
+  export M2_HOME=/opt/maven
+  export MAVEN_HOME=/opt/maven
+  export PATH=${M2_HOME}/bin:${PATH}
+	chmod +x /etc/profile.d/maven.sh
+	source /etc/profile.d/maven.sh
+	mvn -version
+	mvn clean     ## it will give the error but need to execute 
+	mvn install   ## it will give the error but need to execute 
+
+################ Maven configuration in Jenkins for building a WAR file:
+	After logged in into the Jenkins you will get Dashboard.
+	Go to “Manage Jenkins” which is there in left side of Dashboard.
+ 
+	Go to “Global Tool Configuration”
+ 
+	Click on “Maven installations”
+ 
+	Name: Maven, MAVEN_HOME: /opt/maven (Where we have installed) and uncheck the “Install automatically” option.
+ 
+Click on “Apply” and “Save”.
+ 
+Restart the Jenkins once.
+
+################ SMTP Configuration in Jenkins:
+	Go to “Manage Jenkins” which is there in left side of Dashboard.
+ 
+	Go to “Configure System” 
+ 
+	Scroll down to “Extended E-mail Notification” Section and do the SMTP Configuration.
+ 
+Click on “Advanced” option and give the details.
+Click on “Apply and Save”.
+	Under “Publish over SSH”
+ 
+Click on “Add” 
+ 
+Click on “Apply and Save”
+ 
