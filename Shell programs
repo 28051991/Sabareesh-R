@@ -1,0 +1,359 @@
+1.	Perform Arithmetic Operations  
+#/bin/sh
+a=1
+b=2
+sum=` expr $a + $b `
+echo $sum 
+
+2.	#/bin/sh
+a=12;b=32
+res=`expr $a \* $b `
+echo $res 
+
+3.	#/bin/sh
+x=120
+y=17
+ans=` expr $x / $y `
+echo $ans 
+
+4.	#/bin/sh
+x=120
+y=17
+sub=` expr $x -  $y `
+echo $sub
+5.	#/bin/sh
+Name=”James Bond”
+echo $Name
+6.	#/bin/sh
+Num=123
+Echo  ` expr  $Num + 3`
+7.	#/bin/sh
+msg1=Hello
+msg2=Welcome!
+echo $msg1 $msg2
+8.	#/bin/sh
+var1="HI"
+var2="There"
+echo $var1 $var2
+9.	#/bin/sh
+Echo  ‘”welcome world”’ or 	`”welcome world”`  command not found..
+10.	#/bin/sh
+echo $(( 10 +20 +30))
+11.	#/bin/sh
+echo " i have \$100"
+echo " i have $100"
+echo ' i have $100'
+echo printing date and time `date`
+echo $? 
+
+Find the error in the below program and correct it
+========================================
+12.	#/bin/sh
+myname=Vivek
+myos =TroubleOS
+myno=5
+echo "My name is $myname"
+echo "My os is $myos"
+echo "My number is myno,   can you see this number" 
+    13 .  #/bin/sh
+               echo enter ur name
+              read name
+              echo "hello $name" 
+14 . #/bin/sh
+a=0
+  while [ "$a" -lt 10 ]
+do
+   b="$a"
+while [ "$b"  -ge 0 ]
+  do
+    echo -n "$b "
+    b=` expr $b - 1 `
+done
+echo
+a=` expr $a + 1 `
+done
+15 .   #/bin/sh
+a=0
+while [ $a -le 10 ]
+do
+   echo $a
+   a=`expr $a + 1`
+done
+16 . Example for infinit loop 
+=====================
+#/bin/sh
+a=10
+while [ $a -ge 10 ]
+do
+   echo $a
+   a=`expr $a + 1`
+done
+16 . #/bin/sh
+a=0
+while [ $a -le 10 ]
+do
+   if [ $a -eq 5 ]
+ then
+  break
+fi
+   echo $a
+   a=`expr $a + 1`
+done
+17.    for var1 in 1 2 3
+do
+for var2 in 0 5
+   do
+      if [ $var1 -eq 2 -a $var2 -eq 0 ]
+      then
+         break 2
+      else
+         echo "$var1 $var2"
+      fi
+   done
+done
+18. #/bin/sh
+for var1 in 1 2 3
+ do
+    echo $var1
+done
+19.  NUMS="1 2 3 4 5 6 7"
+for NUM in $NUMS
+do
+   Q=`expr $NUM % 2`
+   if [ $Q -eq 0 ]
+   then
+      echo "Number is an even number!!"
+      continue
+   fi
+   echo "Found odd number"
+done
+20. #/bin/sh
+# Usage of test command
+a=5
+read $a
+if test $a -gt 0
+then
+echo "$a number is positive"
+else
+echo "$a is negative"
+fi
+21. #/bin/sh
+#To print the date ,No of users logged in and the uptime of the server
+Date=`date`
+echo "Date is $Date"
+Users=`who | wc -l`
+echo "Logged in Users :$Users"
+UP=`date ;uptime`
+echo "uptime is $UP"
+22. #/bin/sh
+echo "select Department"
+echo -e "1. Technical \t 2. Developing
+echo "Select your choice [1 or 2]
+read depart
+if test  $depart -eq 1
+then
+  echo "You had selected technical as your department"
+ else
+   if test $depart -eq 2
+then
+   echo "you have selected developing as your department"
+else
+echo "No valid Department found"
+ fi
+fi
+
+21.  if cat $1
+ then
+echo -e "\n\n File $1, found and successfully  echoed "
+fi
+22.   #/bin/sh
+if rm  $1
+ then
+echo "$1 file deleted"
+fi
+23.  #/bin/sh
+if [ $# -eq 0 ]
+ then
+echo "$0 - Then you should supply one integer"
+exit 1
+fi 
+
+24 . #/bin/sh
+if [  -z $1  ]
+ then
+course="***Exam Date not scheduled***"
+elif [  -n $1  ]
+then
+course=$1
+fi
+  case $course in
+      "Bcom")echo "Exam date for $course is 15th November";;
+      "Mcom")echo "Exam date for $course is 20th November";;
+      "BCA")echo " Exam date for $course is 18th November";;
+      "MCA")echo " Exam date for $course is 22nd November";;
+  *)echo "Sorry check your choice $course";;
+esac
+25.  if test $1 -eq 1 && test $2 == JAN
+ then
+echo "it is equal"
+ elif test $1 -eq 1 || test $2 == JAN
+then
+  echo "it is not equal"
+else
+echo "unknown value"
+fi 
+26. #/bin/sh
+if [ $1 -eq 1 ] && [ $2 == JAN  ]
+ then
+echo "it is equal"
+ elif [ $1 -eq 1 ] || [ $2 == JAN ]
+then
+  echo "it is not equal"
+else
+echo "unknown value"
+fi 
+27. for var1 in 0 2 4 6 8
+do
+echo "$var1"
+done
+28.  #/bin/sh
+for var1 in 0 2 4 6 8
+ do
+   for var2 in 1 3 5
+do
+echo "$var1  $var2"
+done
+done
+29. if [ $# -eq 0 ]
+then
+echo "Error - Number missing form command line argument"
+echo "Syntax : $0 number"
+echo "Use to print multiplication table for given number"
+exit 1
+fi
+n=$1
+for i in 1 2 3 4 5 6 7 8 9 10
+do
+echo "$n * $i = ` expr $i \* $n `"
+done  
+30 . #/bin/sh
+for ((  i = 0 ;  i <= 5;  i++  ))
+do
+  echo "Welcome $i times"
+done
+31. #/bin/sh
+if [ $1 -gt 0 ]; then
+ echo "$1 is positive"
+elif [ $1 -lt 0 ]
+ then
+  echo "$ is negative"
+  elif [ $1 -eq 0 ]
+then
+ echo "$1 is zero"
+else
+  echo "oops! $1 is not number ,give number"
+fi
+32.  for (( i = 1; i <= 5; i++ ))      ### Outer for loop ###
+do
+
+    for (( j = 1 ; j <= 5; j++ )) ### Inner for loop ###
+    do
+          echo -n "$i "
+    done
+
+  echo "" #### print the new line ###
+
+done
+33. write a script that prints table of any number.
+#!/bin/bash
+echo “Enter The Number upto which you want to Print Table: ” 
+read n 
+i=1 
+while [ $i -ne 10 ] 
+do 
+i=$(expr $i + 1) 
+table=$(expr $i \* $n) 
+echo $table 
+done
+34. find if the number is odd or even
+#!/bin/bash
+echo "Enter The Number" 
+read n 
+num=$(expr $n % 2) 
+if [ $num -eq 0 ] 
+then 
+echo "is a Even Number" 
+else 
+echo "is a Odd Number" 
+fi
+35. to find the Factorial
+
+#!/bin/bash 
+echo "Enter The Number" 
+read a 
+fact=1 
+while [ $a -ne 0 ] 
+do 
+fact=$(expr $fact \* $a) 
+a=$(expr $a - 1) 
+done 
+echo $fact
+36.   To find the Armstrong number 
+#!/bin/bash 
+echo "Enter A Number" 
+read n 
+arm=0 
+temp=$n 
+while [ $n -ne 0 ] 
+do 
+r=$(expr $n % 10) 
+arm=$(expr $arm + $r \* $r \* $r) 
+n=$(expr $n / 10) 
+done 
+echo $arm 
+if [ $arm -eq $temp ] 
+then 
+echo "Armstrong" 
+else 
+echo "Not Armstrong" 
+fi
+
+37. To check whether the number is prime or not 
+#!/bin/bash 
+echo “Enter Any Number”
+read n
+i=1
+c=1
+while [ $i -le $n ]
+do
+i=$(expr $i + 1)
+r=$(expr $n % $i)
+if [ $r -eq 0 ]
+then
+c=$(expr $c + 1)
+fi
+done
+if [ $c -eq 2 ]
+then
+echo “Prime”
+else
+echo “Not Prime”
+fi
+38 . if test $1 -eq 1 && test $2 = 'JAN'
+ then
+echo "it is equal"
+ elif test $1 -eq 1 || test $2 = JAN
+then
+  echo "it is not equal"
+else
+echo "unknown value"
+fi
+39. if [ $1-eq 1 ] && [ $2 == JAN ]
+ then
+    echo "it is equal"
+elif [ $1 -eq 1 ] || [ $2 == JAN ]
+then
+      echo "it is not equal"
+else
+    echo "unknown value"
+fi
